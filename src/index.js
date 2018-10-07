@@ -15,16 +15,20 @@ const createProtoMagicObject = () => {
     magicObject.__proto__ = magicObject.prototype;
     return magicObject;
 };
-const incrementor = () => {
-    return 400;
-};
-const asyncIncrementor = () => { };
+const incrementor = () => { };
+let asyncCount = 0;
+const asyncIncrementor = () => {
+    asyncCount++;
+    return new Promise((resolve, reject) => {
+        resolve(asyncCount);
+    })
+}
 const createIncrementer = () => { };
 
 // return same argument not earlier than in one second, and not later, than in two
-const returnBackInSecond = (argument) => { 
-    return new Promise(function(resolve, reject){
-        setTimeout(() =>{
+const returnBackInSecond = (argument) => {
+    return new Promise(function (resolve, reject) {
+        setTimeout(() => {
             resolve(argument);
         }, 1000);
     })
